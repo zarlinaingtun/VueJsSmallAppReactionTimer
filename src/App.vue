@@ -1,26 +1,45 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+      <h1>How Fast Can You Catch Me ?</h1>
+      <button class="play" @click="start" :disabled="isPlaying">Play</button>
+      <div v-if="isPlaying">
+        <Block :delay="delay"/>
+      </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Block from "./components/Block.vue";
 export default {
-  name: 'App',
+  data(){
+    return{
+      isPlaying:false,
+      delay:null
+    }
+  },
   components: {
-    HelloWorld
+    Block
+  },
+  methods:{
+    start(){
+      this.isPlaying=true,
+      this.delay=Math.floor(2000+Math.random()*5000);
+    }
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+.play{
+  width:100px;
+  height: 50px;
+ 
+  background-color: rgb(145, 163, 197);
+  color:#fff;
+  border-radius: 10px;
+  border:0;
+  font-size: 16px;
+}
+.play:focus{
+  transform: scale(0.89);
+  background-color: rgb(45, 233, 45);
 }
 </style>
